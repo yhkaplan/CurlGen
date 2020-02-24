@@ -15,9 +15,8 @@ extension URLRequest {
         let bodyParameter = makeBodyParameter()
         let methodParameter = (flag: "-X", value: httpMethod)
         
-        var rawParameters: [Parameter] = [methodParameter]
+        var rawParameters = [methodParameter, bodyParameter]
         rawParameters.append(contentsOf: headerParameters)
-        rawParameters.append(bodyParameter) // TODO: reverse body and header position
 
         let joinedParameters = joinParameters(rawParameters)
         

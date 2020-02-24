@@ -71,8 +71,8 @@ final class CurlGenTests: XCTestCase {
         let dataString = "param1=zzz&param2=aaa"
         let curlCommand = """
         \(baseCurlCommand) -X POST \\
-        --header \"Content-Type=application/x-www-form-urlencoded\" \\
-        --data \(dataString)
+        --data \(dataString) \\
+        --header \"Content-Type=application/x-www-form-urlencoded\"
         """
         
         sut.httpBody = dataString.data(using: .utf8)
@@ -86,9 +86,9 @@ final class CurlGenTests: XCTestCase {
         let dataString = "{\"data\": {\"key\": \"value\"}}"
         let curlCommand = """
         \(baseCurlCommand) -X POST \\
+        --data \(dataString) \\
         --header \"Accept=application/json\" \\
-        --header \"Content-Type=application/json\" \\
-        --data \(dataString)
+        --header \"Content-Type=application/json\"
         """
         
         sut.httpBody = dataString.data(using: .utf8)
