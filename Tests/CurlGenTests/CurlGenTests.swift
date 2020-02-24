@@ -10,6 +10,7 @@ final class CurlGenTests: XCTestCase {
 
     static var allTests = [
         ("test_justURL", test_justURL),
+        ("test_withoutVerboseFlag", test_withoutVerboseFlag),
         ("test_eachHTTPMethod", test_eachHTTPMethod),
         ("test_httpHeader", test_httpHeader),
         ("test_httpHeaders", test_httpHeaders),
@@ -32,6 +33,11 @@ final class CurlGenTests: XCTestCase {
     func test_justURL() {
         let cURLCommand = baseCurlCommand + " -X GET"
         XCTAssertEqual(sut.cURLCommand(), cURLCommand)
+    }
+    
+    func test_withoutVerboseFlag() {
+        let cURLCommand = "curl " + urlString + " -X GET"
+        XCTAssertEqual(sut.cURLCommand(isVerbose: false), cURLCommand)
     }
 
     func test_eachHTTPMethod() {
