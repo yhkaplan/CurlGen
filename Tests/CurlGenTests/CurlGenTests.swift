@@ -30,30 +30,30 @@ final class CurlGenTests: XCTestCase {
     }
 
     func test_justURL() {
-        let curlCommand = baseCurlCommand + " -X GET"
-        XCTAssertEqual(sut.cURL, curlCommand)
+        let cURLCommand = baseCurlCommand + " -X GET"
+        XCTAssertEqual(sut.cURLCommand(), cURLCommand)
     }
 
     func test_eachHTTPMethod() {
         let httpMethods = ["GET", "POST", "PUT", "DELETE", "PATCH"]
         httpMethods.forEach { httpMethod in
             sut.httpMethod = httpMethod
-            let curlCommand = baseCurlCommand + " -X \(httpMethod)"
+            let cURLCommand = baseCurlCommand + " -X \(httpMethod)"
 
-            XCTAssertEqual(sut.cURL, curlCommand)
+            XCTAssertEqual(sut.cURLCommand(), cURLCommand)
         }
     }
 
     func test_httpHeader() {
-        let curlCommand = "\(baseCurlCommand) -X GET \\\n--header \"Content-Type=application/json\""
+        let cURLCommand = "\(baseCurlCommand) -X GET \\\n--header \"Content-Type=application/json\""
 
         sut.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        XCTAssertEqual(sut.cURL, curlCommand)
+        XCTAssertEqual(sut.cURLCommand(), cURLCommand)
     }
 
     func test_httpHeaders() {
-        let curlCommand = """
+        let cURLCommand = """
         \(baseCurlCommand) -X GET \\
         --header \"Accept=image/jpeg\" \\
         --header \"Authentication=Bearer 1234\" \\
@@ -64,12 +64,12 @@ final class CurlGenTests: XCTestCase {
         sut.addValue("Bearer 1234", forHTTPHeaderField: "Authentication")
         sut.addValue("image/jpeg", forHTTPHeaderField: "Accept")
 
-        XCTAssertEqual(sut.cURL, curlCommand)
+        XCTAssertEqual(sut.cURLCommand(), cURLCommand)
     }
 
     func test_httpBody() {
         let dataString = "param1=zzz&param2=aaa"
-        let curlCommand = """
+        let cURLCommand = """
         \(baseCurlCommand) -X POST \\
         --data \(dataString) \\
         --header \"Content-Type=application/x-www-form-urlencoded\"
@@ -79,12 +79,12 @@ final class CurlGenTests: XCTestCase {
         sut.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         sut.httpMethod = "POST"
         
-        XCTAssertEqual(sut.cURL, curlCommand)
+        XCTAssertEqual(sut.cURLCommand(), cURLCommand)
     }
 
     func test_complexRequest() {
         let dataString = "{\"data\": {\"key\": \"value\"}}"
-        let curlCommand = """
+        let cURLCommand = """
         \(baseCurlCommand) -X POST \\
         --data \(dataString) \\
         --header \"Accept=application/json\" \\
@@ -96,7 +96,7 @@ final class CurlGenTests: XCTestCase {
         sut.addValue("application/json", forHTTPHeaderField: "Accept")
         sut.httpMethod = "POST"
         
-        XCTAssertEqual(sut.cURL, curlCommand)
+        XCTAssertEqual(sut.cURLCommand(), cURLCommand)
     }
 
 }

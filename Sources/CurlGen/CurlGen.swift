@@ -5,10 +5,11 @@ extension URLRequest {
     private typealias Parameter = (flag: String, value: String?)
     
     /// TODO: document
-    public var cURL: String { // TODO: turn into func accepting isVerbose bool
+    public func cURLCommand(isVerbose: Bool = true) -> String {
         guard let urlString = url?.absoluteString else { return "" }
         
-        let base = "curl -v " + urlString
+        let verbosityFlag = isVerbose ? " -v" : ""
+        let base = "curl" + verbosityFlag + " " + urlString
         let headerParameters = makeHeaderParameters()
         let bodyParameter = makeBodyParameter()
         let methodParameter = (flag: "-X", value: httpMethod)
