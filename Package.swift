@@ -8,15 +8,18 @@ let package = Package(
     products: [
         .library(
             name: "CurlGen",
-            targets: ["CurlGen"]),
+            targets: ["CurlGen"]
+        ),
     ],
     dependencies: [],
     targets: [
         .target(
             name: "CurlGen",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "CurlGenTests",
-            dependencies: ["CurlGen"]),
+            dependencies: ["CurlGen"]
+        ),
     ]
 )

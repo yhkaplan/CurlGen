@@ -1,5 +1,5 @@
-import XCTest
 import CurlGen // Intentionally not importing as @testable to test if everything is public
+import XCTest
 
 final class CurlGenTests: XCTestCase {
 
@@ -14,7 +14,7 @@ final class CurlGenTests: XCTestCase {
         ("test_httpHeader", test_httpHeader),
         ("test_httpHeaders", test_httpHeaders),
         ("test_httpBody", test_httpBody),
-        ("test_complexRequest", test_complexRequest)
+        ("test_complexRequest", test_complexRequest),
     ]
 
     override func setUp() {
@@ -74,11 +74,11 @@ final class CurlGenTests: XCTestCase {
         --data \(dataString) \\
         --header \"Content-Type=application/x-www-form-urlencoded\"
         """
-        
+
         sut.httpBody = dataString.data(using: .utf8)
         sut.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         sut.httpMethod = "POST"
-        
+
         XCTAssertEqual(sut.cURLCommand(), cURLCommand)
     }
 
@@ -90,12 +90,12 @@ final class CurlGenTests: XCTestCase {
         --header \"Accept=application/json\" \\
         --header \"Content-Type=application/json\"
         """
-        
+
         sut.httpBody = dataString.data(using: .utf8)
         sut.addValue("application/json", forHTTPHeaderField: "Content-Type")
         sut.addValue("application/json", forHTTPHeaderField: "Accept")
         sut.httpMethod = "POST"
-        
+
         XCTAssertEqual(sut.cURLCommand(), cURLCommand)
     }
 
