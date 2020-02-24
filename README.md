@@ -13,11 +13,11 @@ curl -v https://www.github.com -X POST \
 --header "Content-Type=application/json"
 ```
 
-### Prerequisites
+## Prerequisites
 
 - Xcode 11.0 or higher
 
-### Installing
+## Installing
 
 Just add the Swift Package to your Xcode project in Project settings, "Swift Packages."
 
