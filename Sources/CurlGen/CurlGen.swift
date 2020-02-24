@@ -4,7 +4,11 @@ extension URLRequest {
     
     private typealias Parameter = (flag: String, value: String?)
     
-    /// TODO: document
+    /// Generates a cURL command based on the URLRequest instance that can be copy and pasted
+    /// right into the command line and executed as is.
+    /// - Warning: This is meant for debugging purposes and not to be used in production in any way
+    /// - Parameter isVerbose: Whether to use the `-v` flag
+    /// - Returns: A cURL command generated from the URLRequest
     public func cURLCommand(isVerbose: Bool = true) -> String {
         guard let urlString = url?.absoluteString else { return "" }
         
@@ -23,7 +27,6 @@ extension URLRequest {
             ? base
             : base + " " + joinedParameters
     }
-
 }
 
 // MARK: - Helper Methods
