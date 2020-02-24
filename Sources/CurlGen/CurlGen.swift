@@ -1,8 +1,6 @@
 import Foundation
 
 extension URLRequest {
-
-    private var base: String { "curl -v " }
     
     private typealias Parameter = (flag: String, value: String?)
     
